@@ -35,7 +35,7 @@ gender = st.radio("Select gender",('Male', 'Female'))
 if gender=="Male":
     gender=1
 else:
-    gender=0
+    gender=2
 
 
 cholesterol = st.radio("Select Cholesterol level",('normal', 'above normal','well above normal'))
@@ -115,8 +115,9 @@ data = st.file_uploader("Upload a Dataset", type=["csv", "txt"])
 
 if st.button('Pred file'):
     try:
-        loaded_model = pickle.load(open("/home/ec2-user/cardio_disease_prediction/pima.pickle2.dat", "rb"))
+        loaded_model = pickle.load(open("/home/ec2-user/cardio_disease_prediction/cardio.pickle2.dat", "rb"))
         df2 = pd.read_csv(data)
+        df2 = df2.drop(["Unnamed: 0"],axis=1)
         y_pred = loaded_model.predict(df2)
         st.write(y_pred)
     except:
