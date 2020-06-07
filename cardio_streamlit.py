@@ -121,7 +121,7 @@ if st.button('Pred file'):
         st.dataframe(data=df2)
         y_pred = loaded_model.predict(df2)
         st.write(y_pred)
-            total_rows = df2.count
+        total_rows = df2.count
     try:
         total_rows = total_rows + 1
         total_positive = y_pred.isin([1]).sum()
