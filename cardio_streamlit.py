@@ -121,7 +121,7 @@ if st.button('Pred file'):
         y_pred = loaded_model.predict(df2)
         st.write(y_pred)
     except:
-        st.wirte("file contain errors")
+        st.write("file contain errors")
     
 
 
