@@ -121,21 +121,9 @@ if st.button('Pred file'):
         st.dataframe(data=df2)
         y_pred = loaded_model.predict(df2)
         st.write(y_pred)
-        total_rows = df2.count
-    try:
-        total_rows = total_rows + 1
-        total_positive = y_pred.isin([1]).sum()
-        perc = ((total_positive * 100)/total_rows)
-        st.write("Total cardiovascular disease percentage =")
-        st.write(perc)
-        st.write("Total cardiovascular disease positive =")
-        st.write(total_positive)
-    except:
-    pass
-
-
     except:
         st.write("file contain errors")
+
     
 
 
