@@ -4,14 +4,13 @@ Created on Sat Jun  6 17:24:24 2020
 
 @author: Mandar Joshi
 """
-import os
+
 import streamlit as st
 import pandas as pd
 import pickle
 import numpy as np
 
 st.header("Cardio Disease Prediction")
-
 
 age = st.sidebar.number_input("Enter age in days")
 age = int(age)
@@ -100,7 +99,7 @@ if st.button('Show Dataframe'):
     
 if st.button('Pred'):
     loaded_model = pickle.load(open("/home/ec2-user/cardio_disease_prediction/cardio.pickle2.dat", "rb"))
-    y_pred = loaded_model.predict(df)[0]
+    y_pred = loaded_model.predict(df)
     st.write(y_pred)
 try:
     if y_pred==0:
@@ -111,28 +110,39 @@ try:
 except:
     pass
 
-data = st.file_uploader("Upload a Dataset", type=["csv", "txt"])
 
-if st.button('Pred file'):
-    try:
-        loaded_model = pickle.load(open("/home/ec2-user/cardio_disease_prediction/cardio.pickle2.dat", "rb"))
-        df2 = pd.read_csv(data)
-        df2 = df2.drop(["Unnamed: 0"],axis=1)
-        st.dataframe(data=df2)
-        y_pred = loaded_model.predict(df2)
-        st.write(y_pred)
-        total_rows = df2.count
-        total_rows = total_rows + 1
-        total_positive = y_pred.isin([1]).sum()
-        perc = ((total_positive * 100)/total_rows)
-        st.write("Total cardiovascular disease percentage =")
-        st.write(perc)
-        st.write("Total cardiovascular disease positive =")
-        st.write(total_positive)
-    except:
-        st.write("file contain errors")
+try:
+    data = st.file_uploader("Upload a Dataset", type=["csv", "txt"])
+    df2 = pd.read_csv(data)
+    df2 = df2.drop(["Unnamed: 0"],axis=1)
+
+   
+    
+    st.write(df2)
+#        df2 = df2.drop(["Unnamed: 0"],axis=1)
+
+
+except:
+    pass
 
     
+
+if st.button('Pred file'):
+    loaded_model = pickle.load(open("/home/ec2-user/cardio_disease_prediction/cardio.pickle2.dat", "rb"))
+#        df2 = df2.drop(["Unnamed: 0"],axis=1)
+    y_pred = loaded_model.predict(df2)
+    st.write(y_pred)
+    total_rows = df2.shape[0]
+    st.write(total_rows)
+    total_rows = total_rows + 1
+    total_positive = np.count_nonzero(y_pred)
+    perc = ((total_positive * 100) // total_rows) 
+    st.write("Total cardiovascular disease percentage = ")
+    st.write(perc)
+    st.write("Total cardiovascular disease positive =")
+    st.write(total_positive)
+    
+
 
 
 #st.dataframe(df)
