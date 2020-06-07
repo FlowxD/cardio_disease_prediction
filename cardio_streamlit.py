@@ -98,7 +98,7 @@ if st.button('Show Dataframe'):
     st.write(df)
     
 if st.button('Pred'):
-    loaded_model = pickle.load(open("cardio.pickle1.dat", "rb"))
+    loaded_model = pickle.load(open("/home/ec2-user/cardio_disease_prediction/cardio.pickle1.dat", "rb"))
     y_pred = loaded_model.predict(df)[0]
     st.write(y_pred)
 try:
@@ -114,7 +114,7 @@ data = st.file_uploader("Upload a Dataset", type=["csv", "txt"])
 
 if st.button('Pred file'):
     try:
-        loaded_model = pickle.load(open("pima.pickle1.dat", "rb"))
+        loaded_model = pickle.load(open("/home/ec2-user/cardio_disease_prediction/pima.pickle1.dat", "rb"))
         df2 = pd.read_csv(data)
         y_pred = loaded_model.predict(df2)
         st.write(y_pred)
