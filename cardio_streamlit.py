@@ -118,6 +118,7 @@ if st.button('Pred file'):
         loaded_model = pickle.load(open("/home/ec2-user/cardio_disease_prediction/cardio.pickle2.dat", "rb"))
         df2 = pd.read_csv(data)
         df2 = df2.drop(["Unnamed: 0"],axis=1)
+        st.dataframe(data=df2)
         y_pred = loaded_model.predict(df2)
         st.write(y_pred)
     except:
