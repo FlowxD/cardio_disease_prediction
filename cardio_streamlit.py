@@ -11,8 +11,7 @@ import pickle
 import numpy as np
 
 st.header("Cardio Disease Prediction")
-env_var = os.environ 
-st.write(env_var)
+
 
 age = st.sidebar.number_input("Enter age in days")
 age = int(age)
